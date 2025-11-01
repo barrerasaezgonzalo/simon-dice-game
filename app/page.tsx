@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 const colors = ["green", "red", "yellow", "blue"] as const;
 type Color = (typeof colors)[number];
@@ -185,13 +187,24 @@ export default function SimonDice() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-[#F2F6F9] flex items-start justify-center p-5">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-white mb-5 drop-shadow-lg">
-          🎮 Simon Dice
+        <h1 className="text-6xl font-bold text-black mb-5 inline-block mt-4">
+          <Image
+            src="/simon-dice.png"
+            alt="Simon Dice"
+            width={100}
+            height={100}
+            style={{ display: "inline" }}
+          />{" "}
+          SIMON DICE!
         </h1>
 
-        <div className="text-2xl text-white mb-5 font-semibold">
+        <p className="text-lg text-black text-[1rem]">
+          Observa la secuencia de colores, memorízala y repítela correctamente
+        </p>
+
+        <div className="text-2xl text-black mb-4 mt-4 font-semibold">
           Nivel: {level}
         </div>
 
@@ -210,25 +223,25 @@ export default function SimonDice() {
           <button
             onClick={startGame}
             disabled={isPlaying}
-            className="px-8 py-4 text-xl font-bold rounded-xl bg-white text-purple-600 shadow-lg hover:translate-y-[-2px] hover:shadow-xl active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="px-8 py-4 text-xl font-bold rounded-xl bg-[#FE8111] text-white shadow-lg hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {level === 0 ? "Iniciar Juego" : "Jugar de Nuevo"}
           </button>
 
           <button
             onClick={resetGame}
-            className="px-8 py-4 text-xl font-bold rounded-xl bg-white text-purple-600 shadow-lg hover:translate-y-[-2px] hover:shadow-xl active:translate-y-0 transition-all"
+            className="px-8 py-4 text-xl font-bold rounded-xl bg-[#277BFF] text-white shadow-lg hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 transition-all"
           >
             Reiniciar
           </button>
         </div>
 
         <div className="mb-5">
-          <label className="text-white text-lg mr-3">Velocidad:</label>
+          <label className="text-black text-lg mr-3">Velocidad:</label>
           <select
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
-            className="px-4 py-2 text-lg rounded-lg border-none cursor-pointer"
+            className="px-4 py-2 text-lg text-black rounded-lg border-none cursor-pointer"
             disabled={isPlaying}
           >
             <option value={1000}>Lenta</option>
@@ -237,9 +250,28 @@ export default function SimonDice() {
           </select>
         </div>
 
-        <div className="text-white text-2xl font-bold min-h-[40px] drop-shadow-md">
-          {message}
-        </div>
+        <div className="text-black text-xl font-bold min-h-10 ">{message}</div>
+
+        <footer className="mt-10 text-black text-center">
+          <p>Creado a las 3 AM cuando el café ya no hacía efecto ☕💻</p>
+
+          <Link href="https://chilehub.cl">
+            <Image
+              src="/chilehub.png"
+              alt="Logo de Sopa de Letras"
+              width={200}
+              height={80}
+              style={{
+                width: "200px",
+                height: "80px",
+                objectFit: "contain",
+                marginTop: "1rem",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+          </Link>
+        </footer>
       </div>
     </div>
   );
